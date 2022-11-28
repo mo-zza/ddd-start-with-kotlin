@@ -6,11 +6,37 @@ import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
 
 class Order(
+    private val orderNumber: String,
     private var state: OrderState,
     private var orderLines: MutableList<OrderLine>,
     private var totalAmounts: Money,
     private var shippingInfo: ShippingInfo,
 ) {
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Order
+
+        if (orderNumber != other.orderNumber) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        val prime = 31
+        var result = 1
+        result = prime * result + getOrderNumber()
+        return result
+    }
+
+    private fun getOrderNumber(): Int {
+        return when {
+            orderNumber.isEmpty() -> 0
+            else -> orderNumber.hashCode()
+        }
+    }
 
     fun Order(orderLines: MutableList<OrderLine>, shippingInfo: ShippingInfo) {
         verifyNotYetShipped()

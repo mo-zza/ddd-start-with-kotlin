@@ -1,10 +1,10 @@
 package com.mozza.dddstart2kotlin.domain.model
 
+import com.mozza.dddstart2kotlin.domain.model.value.Address
+import com.mozza.dddstart2kotlin.domain.model.value.Receiver
+
 class ShippingInfo(
-    val receiverName: String,
-    val receiverPhoneNumber: String,
-    val shippingAddress1: String,
-    val shippingAddress2: String,
-    val shippingZipCode: String,
+    val receiver: Receiver,
+    val address: Address
 ) {
 }
