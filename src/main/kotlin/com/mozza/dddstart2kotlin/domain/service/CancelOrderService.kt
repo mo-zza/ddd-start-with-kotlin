@@ -1,7 +1,6 @@
 package com.mozza.dddstart2kotlin.domain.service
 
-import com.mozza.dddstart2kotlin.domain.persistence.OrderRepository
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
+import com.mozza.dddstart2kotlin.domain.infrastructure.OrderRepository
 import org.springframework.transaction.annotation.Transactional
 
 open class CancelOrderService(private val orderRepository: OrderRepository) {

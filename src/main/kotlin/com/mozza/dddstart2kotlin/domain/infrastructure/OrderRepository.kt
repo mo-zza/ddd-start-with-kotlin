@@ -1,4 +1,4 @@
-package com.mozza.dddstart2kotlin.domain.persistence
+package com.mozza.dddstart2kotlin.domain.infrastructure
 
 import com.mozza.dddstart2kotlin.domain.model.Order
 import org.springframework.data.jpa.repository.JpaRepository
