@@ -73,10 +73,15 @@ class Order(
     }
 
     fun changeShippingInfo(newShippingIngo: ShippingInfo) {
+        checkShippingInfoChangeable();
         if (isShippingChangeable().not()) {
             throw IllegalStateException("can't change shipping in " + state)
         }
         this.shippingInfo = newShippingIngo
+    }
+
+    private fun checkShippingInfoChangeable() {
+        // ...
     }
 
     fun cancel() {
