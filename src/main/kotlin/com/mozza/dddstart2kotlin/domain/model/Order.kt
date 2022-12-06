@@ -58,14 +58,15 @@ class Order(
     }
 
     private fun calculateTotalAmounts() {
-        this.totalAmounts = new Money(orderLines.stream()
-            .mapToInt(OrderLine::getAmounts)
-            .sum())
+        val sum = orderLines.stream()
+            .mapToInt { value -> value.getAmounts() * value.getAmounts() }
+            .sum()
+        this.totalAmounts = Money(sum)
     }
 
     @JvmName("setShippingInfo1")
-    private fun setShippingInfo(shippingInfo: ShippingInfo) {
-        this.shippingInfo = shippingInfo
+    private fun setShippingInfo(newShippingInfo: ShippingInfo) {
+        this.shippingInfo = newShippingInfo
     }
 
     fun changeShipped() {

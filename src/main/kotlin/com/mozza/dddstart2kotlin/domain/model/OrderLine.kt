@@ -3,10 +3,11 @@ package com.mozza.dddstart2kotlin.domain.model
 import com.mozza.dddstart2kotlin.domain.model.value.Money
 
 class OrderLine(
-    var product: Product,
-    var quantity: Money,
-    var price: Int,
-    var amounts: Money?,
+    private var product: Product,
+    private var quantity: Money,
+    private var price: Int,
+    private var amounts: Money?,
+    private var lines: List<OrderLine>
 ) {
 
     fun OrderLine(product: Product, price: Int, quantity: Money) {
@@ -22,5 +23,9 @@ class OrderLine(
 
     fun getAmounts(): Int {
         return calculateAmount()
+    }
+
+    fun changeOrderLines(newLines: List<OrderLine>) {
+        this.lines = newLines
     }
 }
