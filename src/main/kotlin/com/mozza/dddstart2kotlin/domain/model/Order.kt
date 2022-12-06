@@ -1,17 +1,28 @@
 package com.mozza.dddstart2kotlin.domain.model
 
 import com.mozza.dddstart2kotlin.domain.enum.OrderState
+import jakarta.persistence.Access
+import jakarta.persistence.AccessType
+import jakarta.persistence.Entity
+import jakarta.persistence.Table
 
 import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
 
+@Entity
+@Table(name = "purchase_order")
+@Access(AccessType.FIELD)
 class Order(
+    private val number: OrderNo,
     private val orderNumber: String,
     private var state: OrderState,
     private var orderLines: MutableList<OrderLine>,
     private var totalAmounts: Money,
     private var shippingInfo: ShippingInfo,
 ) {
+
+    var number: OrderNo = number
+    private set
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
