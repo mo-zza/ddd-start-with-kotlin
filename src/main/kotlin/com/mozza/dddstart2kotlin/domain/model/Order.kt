@@ -1,17 +1,33 @@
 package com.mozza.dddstart2kotlin.domain.model
 
 import com.mozza.dddstart2kotlin.domain.enum.OrderState
+import com.mozza.dddstart2kotlin.domain.model.value.OrderNo
+import jakarta.persistence.*
 
 import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
 
+@Entity
+@Table(name = "purchase_order")
+@Access(AccessType.FIELD)
 class Order(
+    private val orderNo: OrderNo,
     private val orderNumber: String,
     private var state: OrderState,
     private var orderLines: MutableList<OrderLine>,
     private var totalAmounts: Money,
     private var shippingInfo: ShippingInfo,
 ) {
+
+    @EmbeddedId
+    var number: OrderNo = orderNo
+    private set
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "order_line", joinColumns = @JoinColumn(name = "order_number"))
+    @OrderColumn(name = "line_idx")
+    var orderLines: List<OrderLine>
+    private set
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
