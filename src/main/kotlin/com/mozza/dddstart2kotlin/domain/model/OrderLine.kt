@@ -1,7 +1,10 @@
 package com.mozza.dddstart2kotlin.domain.model
 
 import com.mozza.dddstart2kotlin.domain.model.value.Money
+import jakarta.persistence.Embeddable
+import jakarta.persistence.Embedded
 
+@Embeddable
 class OrderLine(
     private var product: Product,
     private var quantity: Money,
@@ -9,6 +12,10 @@ class OrderLine(
     private var amounts: Money?,
     private var lines: List<OrderLine>
 ) {
+
+    @Embedded
+    var productId: ProductId
+        private set
 
     fun OrderLine(product: Product, price: Int, quantity: Money) {
         this.product = product

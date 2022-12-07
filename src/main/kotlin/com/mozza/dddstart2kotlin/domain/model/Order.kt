@@ -1,10 +1,8 @@
 package com.mozza.dddstart2kotlin.domain.model
 
 import com.mozza.dddstart2kotlin.domain.enum.OrderState
-import jakarta.persistence.Access
-import jakarta.persistence.AccessType
-import jakarta.persistence.Entity
-import jakarta.persistence.Table
+import com.mozza.dddstart2kotlin.domain.model.value.OrderNo
+import jakarta.persistence.*
 
 import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
@@ -13,7 +11,7 @@ import java.lang.IllegalStateException
 @Table(name = "purchase_order")
 @Access(AccessType.FIELD)
 class Order(
-    private val number: OrderNo,
+    private val orderNo: OrderNo,
     private val orderNumber: String,
     private var state: OrderState,
     private var orderLines: MutableList<OrderLine>,
@@ -21,7 +19,14 @@ class Order(
     private var shippingInfo: ShippingInfo,
 ) {
 
-    var number: OrderNo = number
+    @EmbeddedId
+    var number: OrderNo = orderNo
+    private set
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "order_line", joinColumns = @JoinColumn(name = "order_number"))
+    @OrderColumn(name = "line_idx")
+    var orderLines: List<OrderLine>
     private set
 
     override fun equals(other: Any?): Boolean {
