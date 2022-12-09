@@ -19,6 +19,9 @@ class Order(
     private var shippingInfo: ShippingInfo,
 ) {
 
+    var orderId: String = ""
+    private set
+
     @EmbeddedId
     var number: OrderNo = orderNo
     private set
