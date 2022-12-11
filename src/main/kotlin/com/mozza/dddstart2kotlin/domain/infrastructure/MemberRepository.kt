@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface MemberRepository : JpaRepository<Member, String> {
+    fun countsById(id: String): Int
 }
