@@ -9,6 +9,7 @@ open class ChangePasswordServiceImpl(private val memberRepository: MemberReposit
     ChangePasswordService {
 
     @Transactional
+    @PreAuthorize("hasRole('ADMIN)")
     override fun changePassword(req: ChangePasswordRequest) {
         val memberId = req.memberId
         val member = memberRepository.findById(memberId).orElseThrow { throw NotFoundException() }
