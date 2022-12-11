@@ -29,6 +29,8 @@ dependencies {
 
     implementation("org.kie:kie-ci:8.31.0.Final")
     implementation("org.drools:drools-decisiontables:8.31.0.Final")
+    implementation("org.springframework.boot:spring-boot-starter:3.0.0")
+    implementation("org.springframework.boot:spring-boot-starter-aop:3.0.0")
 
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
